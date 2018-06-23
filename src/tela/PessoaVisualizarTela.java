@@ -52,6 +52,7 @@ public class PessoaVisualizarTela extends javax.swing.JFrame {
         
         System.out.println(p.getCidade().getNome());
         labelMostrarCidade.setText(p.getCidade().getNome());
+        System.out.println("id: " + p.getId() + "  nome: " + p.getNome());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -252,7 +253,7 @@ public class PessoaVisualizarTela extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAlterarActionPerformed
-        PessoaAlterarTela tela = new PessoaAlterarTela();
+        PessoaAlterarTela tela = new PessoaAlterarTela(controlePessoa);
         tela.setVisible(true);
     }//GEN-LAST:event_botaoAlterarActionPerformed
 

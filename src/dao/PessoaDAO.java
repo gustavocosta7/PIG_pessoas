@@ -46,13 +46,14 @@ public class PessoaDAO {
         Connection conexao = ControlaConexao.getConection();
         try {
 
-            String sql = "UPDATE pessoa SET pesnome=?, pescpf=?, pesnascimento=?, pessexo=? WHERE ID=?";
+            String sql = "UPDATE pessoa SET pesnome=?, pescpf=?, pesnascimento=?, pessexo=? WHERE pesid=?";
             PreparedStatement instrucao = conexao.prepareStatement(sql);
 
             instrucao.setString(1, p.getNome());
             instrucao.setString(2, p.getCpf());
             instrucao.setDate(3, new java.sql.Date(p.getNascimento().getTimeInMillis()));
             instrucao.setString(4, String.valueOf(p.getSexo()));
+            System.out.println("id : " + p.getNome());
             instrucao.setInt(5, p.getId());
 
             instrucao.execute();

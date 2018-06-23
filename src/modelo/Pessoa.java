@@ -106,7 +106,7 @@ public class Pessoa {
         this.cidade = cidade;
     }
 
-    public void setId(int aInt) {
+    public void setId(int id) {
         this.id = id;
     }
     

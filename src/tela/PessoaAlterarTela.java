@@ -28,16 +28,23 @@ public class PessoaAlterarTela extends javax.swing.JFrame {
     
     public PessoaControle controle = new PessoaControle();
     public CidadeControle cidadeControle = new CidadeControle();
-    public Pessoa p;
-    public PessoaAlterarTela() {
+    
+    public PessoaAlterarTela(PessoaControle controlePessoa) {
+        this.controle = controlePessoa;
         initComponents();
         carregarCidade();
         carregarCampos();
     }
 
+    private PessoaAlterarTela() {
+        initComponents();
+        carregarCidade();
+        carregarCampos();
+    }
+
+    
     private void criarObjeto() throws ParseException {
-       this.p = controle.getPessoa();
-        preencherObjeto(p);
+        preencherObjeto();
     }
 
     private void salvar() throws SQLException, DAOException {
@@ -45,6 +52,7 @@ public class PessoaAlterarTela extends javax.swing.JFrame {
     }
 
     private void carregarCampos(){
+        Pessoa p = controle.getPessoa();
         campoTextoNome.setText(p.getNome());
         campoTextoCpf.setText(p.getCpf());
         campoTextoNasc.setText(DataUtil.ConverterDataEmTexto(p.getNascimento()));
@@ -58,18 +66,19 @@ public class PessoaAlterarTela extends javax.swing.JFrame {
         Cidade cidade = cidadeControle.getCidades().get(comboBoxCidade.getSelectedIndex());
         p.setCidade(cidade);
     }
-    private void preencherObjeto(Pessoa p) throws ParseException {
-        p.setNome(campoTextoNome.getText());
-        p.setCpf(campoTextoCpf.getText());
-        p.setNascimento(DataUtil.ConverterTextoEmData(campoTextoNasc.getText()));
+    private void preencherObjeto() throws ParseException {
+        
+        controle.getPessoa().setNome(campoTextoNome.getText());
+        controle.getPessoa().setCpf(campoTextoCpf.getText());
+        controle.getPessoa().setNascimento(DataUtil.ConverterTextoEmData(campoTextoNasc.getText()));
 
         if (botaoRadioFem.isSelected()) {
-            p.setSexo('F');
+            controle.getPessoa().setSexo('F');
         } else if (botaoRadioMasc.isSelected()) {
-            p.setSexo('M');
+            controle.getPessoa().setSexo('M');
         }
         Cidade cidade = cidadeControle.getCidades().get(comboBoxCidade.getSelectedIndex());
-        p.setCidade(cidade);
+        controle.getPessoa().setCidade(cidade);
     }
 
     private void carregarCidade() {
