@@ -1,0 +1,39 @@
+show databases;
+
+create database ifampig;
+
+use ifampig;
+
+create table cidade (
+	cidid int auto_increment,
+    cidnome varchar(15) not null,
+	ciduf char(2) not null
+    primary key(cidid)
+    );
+    
+desc cidade;
+
+create table pessoa(
+	pesid int auto_increment,
+    pesnome varchar(80) not null,
+    pessexo char(1) not null,
+    pescpf char(14) not null,
+    pesnascimento date not null,
+    pescidid int not null,
+    primary key(pesid),
+    foreign key(pescidid) references cidade(cidid)
+    );
+
+desc pessoa;
+
+alter table cidade 
+change uf ciduf char(2);
+
+desc cidade;
+
+insert into cidade (cidnome, ciduf) values 
+('Manaus', 'AM'),
+('São Paulo', 'SP');
+
+select * from cidade;
+select * from pessoa;
